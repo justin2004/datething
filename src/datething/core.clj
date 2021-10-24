@@ -43,6 +43,7 @@
 
 ; TODO this assumes you want a time 
 ;   it would be nice to return the matched granularity (can we return multiple bindings?)
+; also i am assuming positions in the NodeValue list (i should see if they are reliable)
 (defn -exec ^org.apache.jena.sparql.expr.NodeValue [^org.apache.jena.sparql.expr.NodeValue & v]
   (do (if (= @loaded true)
         nil
