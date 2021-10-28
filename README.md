@@ -44,4 +44,5 @@ WHERE {
 ## notes / limitations
 
 You can't parse a literal like:             `bind(strdt(datething:parse("12 oct 2021"),xsd:dateTime) as ?when)`.
+
 You can only parse a variable binding like: `bind(strdt(datething:parse(?when_string),xsd:dateTime) as ?when)`.
