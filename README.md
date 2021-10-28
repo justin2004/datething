@@ -21,11 +21,15 @@ This allows one to use the parse function inside a SPARQL query to convert strin
 
 - have make and docker installed
 
-- `make`
+- git clone this repo
+
+- cd into it
+
+- run `make`
 
 - Then find `target/datething-0.1.0-SNAPSHOT-standalone.jar` and put it on your Apache Jena Fuseki classpath.
 
-- Then invoke the parse function like so:
+- Then invoke the parse function in a SPARQL query like so:
 ```
 PREFIX datething: <java:datething.>
 select *
