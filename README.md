@@ -2,7 +2,7 @@
 
 ## what
 
-A Apache Jena value function wrapper around the parse function of [Duckling (old)](https://github.com/facebookarchive/duckling_old).
+An Apache Jena value function wrapper around the parse function of [Duckling (old)](https://github.com/facebookarchive/duckling_old).
 The parse function can parse a string like:
 ```
 "the first Tuesday of October"
@@ -27,6 +27,12 @@ This allows one to use the parse function inside a SPARQL query to convert strin
 
 - Then invoke the parse function like so:
 ```
-TODO
+PREFIX datething: <java:datething.>
+select *
+WHERE {
+  ?row xyz:when ?when_string .
+  bind(strdt(datething:parse(?when_string),xsd:dateTime) as ?when)
+}'
+
 ```
-- or follow [this]() blog post
+- you can also follow [this]() blog post for more detail instructions.
