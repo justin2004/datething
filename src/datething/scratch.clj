@@ -4,6 +4,10 @@
   (:require [duckling.core :as p]
             [clojure.pprint :as pp]))
 
+; don't look here -- just a scratch pad
+
+
+
 ; (p/load!)
 ; (pp/pprint 44  )
 ; (pp/pprint (p/parse :en$core

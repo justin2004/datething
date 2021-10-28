@@ -1,5 +1,7 @@
 (ns datething.junk)
 
+; don't look here -- just a scratch pad
+
 (jstatic "createDataset" (jclass "org.apache.jena.tdb2.TDB2Factory"))
 (def ds (org.apache.jena.tdb2.TDB2Factory/createDataset))
 (.begin ds)

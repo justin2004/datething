@@ -1,17 +1,13 @@
-(ns datething.core
+(ns datething.parse
   (:gen-class
    :extends org.apache.jena.sparql.function.FunctionBase1)
-  (:require [duckling.core :as p]
+  (:require [duckling.core :as duck]
             [clojure.pprint :as pp]))
-
-
-
 
 ; we need this so we don't keep loading the classifiers
 ;  Duckling didn't export the function to check if we've already loaded
 (def loaded (atom ()))
 (reset! loaded false)
-
 
 
 ; TODO this assumes you want a time 
@@ -27,13 +23,13 @@
         (do
           (.println (java.lang.System/out)
                     "loading Duckling rules and classifiers...")
-          (p/load! {:languages '("en")}) ; load only english  --   TODO make this a param?
+          (duck/load! {:languages '("en")}) ; load only english  --   TODO make this a param?
           (reset! loaded true)))
       (let [asked (.asVar (.get (.getList (nth v 2)) ; asked is the Var passed into the function
-                                     0))
-            looked (str (.getLiteralValue (.get (nth v 1) ; looked is the Var's value as found in the bindings
-                              asked)))
-            parsed (str (:value (:value (first (p/parse :en$core    ; parsed is the parsed Var's value
-                                                        looked 
-                                                        [:time])))))
-            ] (new org.apache.jena.sparql.expr.nodevalue.NodeValueString parsed))))
+                                0))
+            looked (str (.getLiteralValue (.get (nth v 1) ; looked is the Var's value as found (looked up) in the bindings
+                                                asked)))
+            parsed (str (:value (:value (first (duck/parse :en$core    ; parsed is the parsed Var's value
+                                                           looked 
+                                                           [:time])))))] 
+        (new org.apache.jena.sparql.expr.nodevalue.NodeValueString parsed))))
