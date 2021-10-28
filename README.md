@@ -1,4 +1,9 @@
 # datething
 
-run `lein uberjar` and the put the jar on your fuseki classpath.
-see https://gist.github.com/justin2004/e12874035398b107c58a9a029ab6e632 for query example
+- have make and docker installed
+
+`make`
+
+Then find `target/datething-0.1.0-SNAPSHOT-standalone.jar` and put it on your Apache Jena Fuseki classpath.
+
+Then invoke the parse function like so:
