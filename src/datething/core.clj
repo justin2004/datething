@@ -4,53 +4,30 @@
   (:require [duckling.core :as p]
             [clojure.pprint :as pp]))
 
-; (p/load!)
-; (p/get-classifier 'core$en)
-; (p/classifiers-map)
-; (pp/pprint 44  )
-
-; (pp/pprint (p/parse :en$core
-;          "21 October 2021" [:time]))
-
-; (:value (:value (first (p/parse :en$core
-;          "12 Sep 1999" [:time]))))
 
 
-(comment (defn -exec ^org.apache.jena.sparql.expr.NodeValue [^org.apache.jena.sparql.expr.NodeValue & v]
-  (new org.apache.jena.sparql.expr.nodevalue.NodeValueString
-       (str "got dis:" (vec (p/parse :en$core
-                                (.asString (first (.getList (nth v 2))))
-                                [:time]))))))
 
-
-(comment (defn -exec ^org.apache.jena.sparql.expr.NodeValue [^org.apache.jena.sparql.expr.NodeValue & v]
-  (do (if (= @loaded true)
-        nil
-        (do
-          (.println (java.lang.System/out)
-                    "loading...")
-          (p/load!)
-          (reset! loaded true)))
-      (new org.apache.jena.sparql.expr.nodevalue.NodeValueString
-           (str (:value (:value (first (p/parse :en$core
-                                                (.asString (first (.getList (nth v 2))))
-                                                [:time])))))))))
-
-
-; we need this so we don't keep loading the model
+; we need this so we don't keep loading the classifiers
+;  Duckling didn't export the function to check if we've already loaded
 (def loaded (atom ()))
 (reset! loaded false)
+
+
 
 ; TODO this assumes you want a time 
 ;   it would be nice to return the matched granularity (can we return multiple bindings?)
 ; also i am assuming positions in the NodeValue list (i should see if they are reliable)
+;
+; TODO
+;  "Context is a map with a :reference-time key. If not provided, the system current date and time is used."
+;  ^ alow passingin a reference-time from SPARQL
 (defn -exec ^org.apache.jena.sparql.expr.NodeValue [^org.apache.jena.sparql.expr.NodeValue & v]
   (do (if (= @loaded true)
         nil
         (do
           (.println (java.lang.System/out)
-                    "loading...")
-          (p/load!) ; TODO how to load only english?
+                    "loading Duckling rules and classifiers...")
+          (p/load! {:languages '("en")}) ; load only english  --   TODO make this a param?
           (reset! loaded true)))
       (let [asked (.asVar (.get (.getList (nth v 2)) ; asked is the Var passed into the function
                                      0))
@@ -60,19 +37,3 @@
                                                         looked 
                                                         [:time])))))
             ] (new org.apache.jena.sparql.expr.nodevalue.NodeValueString parsed))))
-
-
-(comment (defn -exec ^org.apache.jena.sparql.expr.NodeValue [^org.apache.jena.sparql.expr.NodeValue & v]
-  (do (if (= @loaded true)
-        nil
-        (do
-          (.println (java.lang.System/out)
-                    "loading...")
-          (p/load!)
-          (reset! loaded true)))
-      (new org.apache.jena.sparql.expr.nodevalue.NodeValueString
-           (str (.get (nth v 1)
-                      (org.apache.jena.sparql.core.Var/alloc "now")))))))
-
-
-; (print (datething.core/-exec "hh" 44  ))

@@ -9,6 +9,24 @@
 ; (pp/pprint (p/parse :en$core
 ;          "21 October 2021" [:time]))
 
+; (p/load! {:languages '("en")})
+; (p/get-classifier 'core$en)
+; (p/classifiers-map)
+; (pp/pprint 44  )
+
+; (pp/pprint (p/parse :en$core
+;          "eastern daylight savings time" [:timezone]))
+
+; (do
+;  (print "_") 
+;  (pp/pprint (p/parse :en$core
+;          "40000000 days" [:duration]))
+;   (print "_"))
+
+; (:value (:value (first (p/parse :en$core
+;          "12 Sep 1999" [:time]))))
+
+
 
 (def ret (new org.apache.jena.sparql.expr.nodevalue.NodeValueString
      "done"))
