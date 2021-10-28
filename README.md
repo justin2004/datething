@@ -1,9 +1,32 @@
 # datething
 
+## what
+
+A Apache Jena value function wrapper around the parse function of [Duckling (old)](https://github.com/facebookarchive/duckling_old).
+The parse function can parse a string like:
+```
+"the first Tuesday of October"
+```
+into 
+```
+{:value "2014-10-07T00:00:00.000-07:00"
+                                   :grain :day}
+```
+
+## why
+
+This allows one to use the parse function inside a SPARQL query to convert strings representing dates into xsd:dateTime values.
+
+## how
+
 - have make and docker installed
 
-`make`
+- `make`
 
-Then find `target/datething-0.1.0-SNAPSHOT-standalone.jar` and put it on your Apache Jena Fuseki classpath.
+- Then find `target/datething-0.1.0-SNAPSHOT-standalone.jar` and put it on your Apache Jena Fuseki classpath.
 
-Then invoke the parse function like so:
+- Then invoke the parse function like so:
+```
+TODO
+```
+- or follow [this]() blog post
