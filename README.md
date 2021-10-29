@@ -39,7 +39,7 @@ WHERE {
 }'
 
 ```
-- you can also follow [this]() blog post for more detail instructions.
+- you can also follow [this](https://github.com/justin2004/weblog/tree/master/SPARQL_value_functions) blog post for more detail instructions.
 
 ## notes / limitations
 
